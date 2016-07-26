@@ -1,6 +1,7 @@
 import React from 'react'
 import background from '../images/screen-bg.jpg'
 
+import io from 'socket.io-client'
 
 const styles = {
   screen: {
@@ -11,6 +12,10 @@ const styles = {
 }
 
 class Hello extends React.Component {
+
+  componentDidMount() {
+  }
+
   render() {
     return (
       <div style={styles.screen}></div>

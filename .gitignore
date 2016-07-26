@@ -1,6 +1,11 @@
+# build files
+build
 bundle.js
 *.bundle.js
+
+# nodejs
 node_modules
-build
-npm-debug.log
+*.log
+
+# system
 .DS_Store
