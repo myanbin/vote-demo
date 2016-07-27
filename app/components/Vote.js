@@ -13,7 +13,7 @@ class VoteHeader extends React.Component {
   render() {
     let title = this.props.name + '（' + ['预选', '第一轮', '第二轮', '第三轮'][this.props.round] + '）'
     return (
-      <h2 style={{margin: 24}}>{title}</h2>
+      <h2 style={{margin: 24, flex: '100%'}}>{title}</h2>
     )
   }
 }
@@ -46,21 +46,30 @@ class CandidatesBox extends React.Component {
       )
     }
     return (
-      <Table multiSelectable={true}>
-        <TableHeader enableSelectAll={false}>
-          <TableRow>
-            <TableHeaderColumn style={{fontSize: 16, width: 24}}>#</TableHeaderColumn>
-            <TableHeaderColumn style={{fontSize: 16}}>拟表彰内容</TableHeaderColumn>
-          </TableRow>
-        </TableHeader>
-        <TableBody showRowHover={true}>
-          {this.props.candidates.map(createCandidate)}
-        </TableBody>
-      </Table>
+      <div style={{flex: '62%'}}>
+        <Table multiSelectable={true}>
+          <TableHeader enableSelectAll={false}>
+            <TableRow>
+              <TableHeaderColumn style={{fontSize: 16, width: 24}}>#</TableHeaderColumn>
+              <TableHeaderColumn style={{fontSize: 16}}>拟表彰内容</TableHeaderColumn>
+            </TableRow>
+          </TableHeader>
+          <TableBody showRowHover={true}>
+            {this.props.candidates.map(createCandidate)}
+          </TableBody>
+        </Table>
+      </div>
     )
   }
 }
 
+class SelectedBox extends React.Component {
+  render() {
+    return (
+      <div style={{flex: '38%'}}></div>
+    )
+  }
+}
 
 class Vote extends React.Component {
 
@@ -103,9 +112,10 @@ class Vote extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{display: 'flex', flexFlow: 'row wrap'}}>
         <VoteHeader name={this.state.planName} round={this.state.currentRound} />
         <CandidatesBox candidates={this.state.candidates} />
+        <SelectedBox />
         <WaitingModal voted={this.state.isVoted} />
         <RaisedButton
           label="提交选票" primary={true}

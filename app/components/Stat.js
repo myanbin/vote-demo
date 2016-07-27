@@ -1,9 +1,6 @@
 import React from 'react'
 
-import { List, ListItem } from 'material-ui/List'
-import Avatar from 'material-ui/Avatar';
-import Divider from 'material-ui/Divider'
-import LinearProgress from 'material-ui/LinearProgress'
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table'
 import { red500, blue500, grey400, transparent } from 'material-ui/styles/colors'
 
 import io from 'socket.io-client'
@@ -12,7 +9,7 @@ class StatHeader extends React.Component {
   render() {
     let title = this.props.name + '（' + ['预选', '第一轮', '第二轮', '第三轮'][this.props.round] + '）投票结果'
     return (
-      <h2 style={{margin: 24}}>{title}</h2>
+      <h2 style={{margin: 24, flex: '100%'}}>{title}</h2>
     )
   }
 }
@@ -21,32 +18,37 @@ class ResultsRankBox extends React.Component {
   render() {
     let createItem = (item, index) => {
       return (
-        <div key={index}>
-          <Divider />
-          <ListItem
-            disabled={true}
-            leftAvatar={
-              <Avatar color={grey400} backgroundColor={transparent}>{index + 1}</Avatar>
-            }
-            rightAvatar={
-              <Avatar backgroundColor={item.isQualified?blue500:grey400} style={{marginRight: 60}}>{item.score}</Avatar>
-            }
-            primaryText={
-              <div style={{width: '80%'}}>{item.title}</div>
-            }
-            secondaryText={
-              <LinearProgress mode="determinate" color={red500} style={{height: 5, width: '80%', marginTop: 10}} value={item.score} />
-            }
-          />
-        </div>
+        <TableRow key={index}>
+          <TableRowColumn style={{fontSize: 16, width: 24}}>{index + 1}</TableRowColumn>
+          <TableRowColumn style={{fontSize: 16}}>{item.title}</TableRowColumn>
+          <TableRowColumn style={{fontSize: 16, width: 24, color: blue500}}>{item.score}</TableRowColumn>
+        </TableRow>
       )
     }
     return (
-      <div>
-        <List>
-          {this.props.results.map(createItem)}
-        </List>
+      <div style={{flex: '62%'}}>
+        <Table>
+          <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
+            <TableRow>
+              <TableHeaderColumn style={{fontSize: 16, width: 24}}>#</TableHeaderColumn>
+              <TableHeaderColumn style={{fontSize: 16}}>拟表彰内容</TableHeaderColumn>
+              <TableHeaderColumn style={{fontSize: 16, width: 24}}>得票数</TableHeaderColumn>
+            </TableRow>
+          </TableHeader>
+          <TableBody showRowHover={true} displayRowCheckbox={false}>
+            {this.props.results.map(createItem)}
+          </TableBody>
+        </Table>
       </div>
+    )
+  }
+}
+
+
+class SidebarBox extends React.Component {
+  render() {
+    return (
+      <div style={{flex: '38%'}}></div>
     )
   }
 }
@@ -89,9 +91,10 @@ class Stat extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div style={{display: 'flex', flexFlow: 'row wrap'}}>
         <StatHeader name={this.state.planName} round={this.state.currentRound} />
         <ResultsRankBox results={this.state.resultsRank} />
+        <SidebarBox />
       </div>
     )
   }
