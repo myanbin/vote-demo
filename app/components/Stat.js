@@ -9,7 +9,7 @@ class StatHeader extends React.Component {
   render() {
     let title = this.props.name + '（' + ['预选', '第一轮', '第二轮', '第三轮'][this.props.round] + '）投票结果'
     return (
-      <h2 style={{margin: 24, flex: '100%'}}>{title}</h2>
+      <h2 style={{margin: 24}}>{title}</h2>
     )
   }
 }
@@ -21,18 +21,18 @@ class ResultsRankBox extends React.Component {
         <TableRow key={index}>
           <TableRowColumn style={{fontSize: 16, width: 24}}>{index + 1}</TableRowColumn>
           <TableRowColumn style={{fontSize: 16}}>{item.title}</TableRowColumn>
-          <TableRowColumn style={{fontSize: 16, width: 24, color: blue500}}>{item.score}</TableRowColumn>
+          <TableRowColumn style={{fontSize: 16, width: 64, color: blue500}}>{item.score}</TableRowColumn>
         </TableRow>
       )
     }
     return (
-      <div style={{flex: '62%'}}>
+      <div>
         <Table>
           <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
             <TableRow>
               <TableHeaderColumn style={{fontSize: 16, width: 24}}>#</TableHeaderColumn>
               <TableHeaderColumn style={{fontSize: 16}}>拟表彰内容</TableHeaderColumn>
-              <TableHeaderColumn style={{fontSize: 16, width: 24}}>得票数</TableHeaderColumn>
+              <TableHeaderColumn style={{fontSize: 16, width: 64}}>得票数</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody showRowHover={true} displayRowCheckbox={false}>
@@ -45,13 +45,6 @@ class ResultsRankBox extends React.Component {
 }
 
 
-class SidebarBox extends React.Component {
-  render() {
-    return (
-      <div style={{flex: '38%'}}></div>
-    )
-  }
-}
 
 class Stat extends React.Component {
   constructor() {
@@ -91,10 +84,9 @@ class Stat extends React.Component {
   }
   render() {
     return (
-      <div style={{display: 'flex', flexFlow: 'row wrap'}}>
+      <div>
         <StatHeader name={this.state.planName} round={this.state.currentRound} />
         <ResultsRankBox results={this.state.resultsRank} />
-        <SidebarBox />
       </div>
     )
   }

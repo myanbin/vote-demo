@@ -13,7 +13,7 @@ class VoteHeader extends React.Component {
   render() {
     let title = this.props.name + '（' + ['预选', '第一轮', '第二轮', '第三轮'][this.props.round] + '）'
     return (
-      <h2 style={{margin: 24, flex: '100%'}}>{title}</h2>
+      <h2 style={{margin: 24}}>{title}</h2>
     )
   }
 }
@@ -46,7 +46,7 @@ class CandidatesBox extends React.Component {
       )
     }
     return (
-      <div style={{flex: '62%'}}>
+      <div>
         <Table multiSelectable={true}>
           <TableHeader enableSelectAll={false}>
             <TableRow>
@@ -63,13 +63,7 @@ class CandidatesBox extends React.Component {
   }
 }
 
-class SelectedBox extends React.Component {
-  render() {
-    return (
-      <div style={{flex: '38%'}}></div>
-    )
-  }
-}
+
 
 class Vote extends React.Component {
 
@@ -112,10 +106,9 @@ class Vote extends React.Component {
 
   render() {
     return (
-      <div style={{display: 'flex', flexFlow: 'row wrap'}}>
+      <div>
         <VoteHeader name={this.state.planName} round={this.state.currentRound} />
         <CandidatesBox candidates={this.state.candidates} />
-        <SelectedBox />
         <WaitingModal voted={this.state.isVoted} />
         <RaisedButton
           label="提交选票" primary={true}
