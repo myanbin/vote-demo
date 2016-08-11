@@ -41,7 +41,8 @@ class CandidatesBox extends React.Component {
       return (
         <TableRow key={index}>
           <TableRowColumn style={{fontSize: 16, width: 24}}>{index + 1}</TableRowColumn>
-          <TableRowColumn style={{fontSize: 16}}>{candidate.title}</TableRowColumn>
+          <TableRowColumn style={{fontSize: 16, width: '62%'}}>{candidate.title}</TableRowColumn>
+          <TableRowColumn style={{fontSize: 16}}>{candidate.owner}</TableRowColumn>
         </TableRow>
       )
     }
@@ -51,7 +52,8 @@ class CandidatesBox extends React.Component {
           <TableHeader enableSelectAll={false}>
             <TableRow>
               <TableHeaderColumn style={{fontSize: 16, width: 24}}>#</TableHeaderColumn>
-              <TableHeaderColumn style={{fontSize: 16}}>拟表彰内容</TableHeaderColumn>
+              <TableHeaderColumn style={{fontSize: 16, width: '62%'}}>拟表彰内容</TableHeaderColumn>
+              <TableHeaderColumn style={{fontSize: 16}}>报送部门</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody showRowHover={true}>
@@ -85,15 +87,18 @@ class Vote extends React.Component {
       candidates: [
         {
           id: 10001,
-          title: '第二届世界互联网大会系列报道报道'
+          title: '第二届世界互联网大会系列报道报道',
+          owner: '国内部'
         },
         {
           id: 10002,
-          title: '“东北区域改革”调研报道'
+          title: '“东北区域改革”调研报道',
+          owner: '黑龙江分社'
         },
         {
           id: 10003,
-          title: '“‘十二五’回顾与‘十三五’开局看落实”全媒体调研报道'
+          title: '“‘十二五’回顾与‘十三五’开局看落实”全媒体调研报道',
+          owner: '对外部'
         }
       ]
     })
