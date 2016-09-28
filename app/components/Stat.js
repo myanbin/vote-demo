@@ -1,28 +1,27 @@
 import React from 'react'
 
-import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table'
-import { red500, blue500, grey400, transparent } from 'material-ui/styles/colors'
+import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table'
 
 import io from 'socket.io-client'
 
 class StatHeader extends React.Component {
   render() {
-    let title = this.props.name + '（' + ['预选', '第一轮', '第二轮', '第三轮'][this.props.round] + '）投票结果'
+    let title = this.props.name + ' 投票结果'
     return (
       <h2 style={{margin: 24}}>{title}</h2>
     )
   }
 }
 
-class ResultsRankBox extends React.Component {
+class ResultsTable extends React.Component {
   render() {
-    let createItem = (item, index) => {
+    let createCandidate = (candidate, index) => {
       return (
         <TableRow key={index}>
           <TableRowColumn style={{fontSize: 16, width: 24}}>{index + 1}</TableRowColumn>
-          <TableRowColumn style={{fontSize: 16, width: '62%'}}>{item.title}</TableRowColumn>
-          <TableRowColumn style={{fontSize: 16}}>{item.owner}</TableRowColumn>
-          <TableRowColumn style={{fontSize: 16, width: 70}}><strong>{item.score}</strong></TableRowColumn>
+          <TableRowColumn style={{fontSize: 16, width: '62%'}}>{candidate.title}</TableRowColumn>
+          <TableRowColumn style={{fontSize: 16}}>{candidate.owner}</TableRowColumn>
+          <TableRowColumn style={{fontSize: 16, width: 70}}>{candidate.score}</TableRowColumn>
         </TableRow>
       )
     }
@@ -38,7 +37,7 @@ class ResultsRankBox extends React.Component {
             </TableRow>
           </TableHeader>
           <TableBody showRowHover={true} displayRowCheckbox={false}>
-            {this.props.results.map(createItem)}
+            {this.props.results.map(createCandidate)}
           </TableBody>
         </Table>
       </div>
@@ -54,15 +53,14 @@ class Stat extends React.Component {
 
     this.state = {
       planName: '',
-      resultsRank: []
+      data: []
     }
   }
 
   componentDidMount() {
     this.setState({
       planName: '总编室第 52 次编务会通报表扬投票',
-      currentRound: 1,
-      resultsRank: [
+      data: [
         {
           id: 10001,
           title: '第二届世界互联网大会系列报道报道',
@@ -90,8 +88,8 @@ class Stat extends React.Component {
   render() {
     return (
       <div>
-        <StatHeader name={this.state.planName} round={this.state.currentRound} />
-        <ResultsRankBox results={this.state.resultsRank} />
+        <StatHeader name={this.state.planName} />
+        <ResultsTable results={this.state.data} />
       </div>
     )
   }

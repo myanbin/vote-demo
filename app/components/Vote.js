@@ -1,40 +1,25 @@
 import React from 'react'
 
-import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table'
-import RaisedButton from 'material-ui/RaisedButton'
+import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table'
 import Dialog from 'material-ui/Dialog'
-import LinearProgress from 'material-ui/LinearProgress'
+import FlatButton from 'material-ui/FlatButton'
+import RaisedButton from 'material-ui/RaisedButton'
+
 
 import io from 'socket.io-client'
 
 
-
 class VoteHeader extends React.Component {
   render() {
-    let title = this.props.name + '（' + ['预选', '第一轮', '第二轮', '第三轮'][this.props.round] + '）'
+    let title = this.props.name
     return (
       <h2 style={{margin: 24}}>{title}</h2>
     )
   }
 }
 
-class WaitingModal extends React.Component {
 
-  render() {
-    return (
-      <Dialog
-        title="你已经提交选票，请等待其他 3 位评委"
-        contentStyle={{width: '100%', maxWidth: 'none', textAlign: 'center'}}
-        modal={true}
-        open={this.props.voted}
-      >
-        <LinearProgress mode="indeterminate" style={{width: 500, margin: 'auto'}} />
-      </Dialog>
-    )
-  }
-}
-
-class CandidatesBox extends React.Component {
+class CandidatesTable extends React.Component {
 
   render() {
     let createCandidate = (candidate, index) => {
@@ -65,7 +50,56 @@ class CandidatesBox extends React.Component {
   }
 }
 
+class ConfirmModal extends React.Component {
 
+  constructor() {
+    super()
+
+    this.state = {
+      open: false
+    }
+
+    this.handleOpen = this.handleOpen.bind(this)
+    this.handleClose = this.handleClose.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleOpen() {
+    this.setState({open: true})
+  }
+  handleClose() {
+    this.setState({open: false})
+  }
+  handleSubmit() {
+    console.log('submit vote: ...')
+  }
+
+  render() {
+    const actions = [
+      <FlatButton label="取消" primary={true} onTouchTap={this.handleClose} />,
+      <FlatButton label="提交" primary={true} keyboardFocused={true} onTouchTap={this.handleSubmit} />
+    ];
+    return (
+      <div>
+        <RaisedButton
+          label="投票"
+          primary={true}
+          style={{margin: 24}}
+          labelStyle={{fontSize: 16}}
+          onTouchTap={this.handleOpen}
+        />
+        <Dialog
+          title="确定投票吗"
+          modal={true}
+          actions={actions}
+          open={this.state.open}
+        >
+          点击提交后，你的选择会立即发送到服务器进行计算。如果你改变了主意，请点击取消。
+        </Dialog>
+      </div>
+    )
+  }
+}
 
 class Vote extends React.Component {
 
@@ -73,18 +107,15 @@ class Vote extends React.Component {
     super()
 
     this.state = {
-      isVoted: false,
       planName: '',
-      currentRound: 0,
-      candidates: []
+      data: []
     }
   }
 
   componentDidMount() {
     this.setState({
       planName: '总编室第 52 次编务会通报表扬投票',
-      currentRound: 1,
-      candidates: [
+      data: [
         {
           id: 10001,
           title: '第二届世界互联网大会系列报道报道',
@@ -104,22 +135,13 @@ class Vote extends React.Component {
     })
   };
 
-  handleSubmit() {
-    this.setState({isVoted: true})
-    setTimeout(() => this.props.history.push('/stat'), 2000)
-  }
 
   render() {
     return (
       <div>
-        <VoteHeader name={this.state.planName} round={this.state.currentRound} />
-        <CandidatesBox candidates={this.state.candidates} />
-        <WaitingModal voted={this.state.isVoted} />
-        <RaisedButton
-          label="提交选票" primary={true}
-          style={{margin: 16}} labelStyle={{fontSize: 16}}
-          onTouchTap={this.handleSubmit.bind(this)}
-        />
+        <VoteHeader name={this.state.planName} />
+        <CandidatesTable candidates={this.state.data} />
+        <ConfirmModal />
       </div>
     )
   }
