@@ -5,7 +5,7 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Router, Route, hashHistory, IndexRoute} from 'react-router'
+import { Router, Route, hashHistory, IndexRoute } from 'react-router'
 
 import injectTapEventPlugin from 'react-tap-event-plugin'
 

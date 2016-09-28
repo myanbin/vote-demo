@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table'
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -25,9 +25,15 @@ class CandidatesTable extends React.Component {
     let createCandidate = (candidate, index) => {
       return (
         <TableRow key={index}>
-          <TableRowColumn style={{fontSize: 16, width: 24}}>{index + 1}</TableRowColumn>
-          <TableRowColumn style={{fontSize: 16, width: '62%'}}>{candidate.title}</TableRowColumn>
-          <TableRowColumn style={{fontSize: 16}}>{candidate.owner}</TableRowColumn>
+          <TableRowColumn style={{fontSize: 16, width: 24}}>
+            {index + 1}
+          </TableRowColumn>
+          <TableRowColumn style={{fontSize: 16, width: '62%'}}>
+            {candidate.title}
+          </TableRowColumn>
+          <TableRowColumn style={{fontSize: 16}}>
+            {candidate.owner}
+          </TableRowColumn>
         </TableRow>
       )
     }
@@ -36,9 +42,15 @@ class CandidatesTable extends React.Component {
         <Table multiSelectable={true}>
           <TableHeader enableSelectAll={false}>
             <TableRow>
-              <TableHeaderColumn style={{fontSize: 16, width: 24}}>#</TableHeaderColumn>
-              <TableHeaderColumn style={{fontSize: 16, width: '62%'}}>拟表彰内容</TableHeaderColumn>
-              <TableHeaderColumn style={{fontSize: 16}}>报送部门</TableHeaderColumn>
+              <TableHeaderColumn style={{fontSize: 16, width: 24}}>
+                #
+              </TableHeaderColumn>
+              <TableHeaderColumn style={{fontSize: 16, width: '62%'}}>
+                拟表彰内容
+              </TableHeaderColumn>
+              <TableHeaderColumn style={{fontSize: 16}}>
+                报送部门
+              </TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody showRowHover={true}>
