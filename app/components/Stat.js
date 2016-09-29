@@ -25,13 +25,13 @@ class ResultsTable extends React.Component {
           <TableRowColumn style={{fontSize: 16, width: 24}}>
             {index + 1}
           </TableRowColumn>
-          <TableRowColumn style={{fontSize: 16, width: '62%'}}>
+          <TableRowColumn style={{fontSize: 16, width: '60%'}}>
             {candidate.title}
           </TableRowColumn>
           <TableRowColumn style={{fontSize: 16}}>
             {candidate.owner}
           </TableRowColumn>
-          <TableRowColumn style={{fontSize: 16, width: 70}}>
+          <TableRowColumn style={{fontSize: 16, width: 60}}>
             {candidate.score}
           </TableRowColumn>
         </TableRow>

@@ -28,7 +28,7 @@ class CandidatesTable extends React.Component {
           <TableRowColumn style={{fontSize: 16, width: 24}}>
             {index + 1}
           </TableRowColumn>
-          <TableRowColumn style={{fontSize: 16, width: '62%'}}>
+          <TableRowColumn style={{fontSize: 16, width: '60%'}}>
             {candidate.title}
           </TableRowColumn>
           <TableRowColumn style={{fontSize: 16}}>
@@ -70,19 +70,15 @@ class ConfirmModal extends React.Component {
     this.state = {
       open: false
     }
-
-    this.handleOpen = this.handleOpen.bind(this)
-    this.handleClose = this.handleClose.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleOpen() {
+  handleOpen = () => {
     this.setState({open: true})
   }
-  handleClose() {
+  handleClose = () => {
     this.setState({open: false})
   }
-  handleSubmit() {
+  handleSubmit = () => {
     console.log('submit vote: ...')
   }
 
