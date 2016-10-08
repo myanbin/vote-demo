@@ -1,4 +1,5 @@
 import React from 'react'
+import { hashHistory } from 'react-router'
 
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table'
 import Dialog from 'material-ui/Dialog'
@@ -45,7 +46,7 @@ class CandidatesTable extends React.Component {
               <TableHeaderColumn style={{fontSize: 16, width: 24}}>
                 #
               </TableHeaderColumn>
-              <TableHeaderColumn style={{fontSize: 16, width: '62%'}}>
+              <TableHeaderColumn style={{fontSize: 16, width: '60%'}}>
                 拟表彰内容
               </TableHeaderColumn>
               <TableHeaderColumn style={{fontSize: 16}}>
@@ -80,6 +81,7 @@ class ConfirmModal extends React.Component {
   }
   handleSubmit = () => {
     console.log('submit vote: ...')
+    hashHistory.push('/wait')
   }
 
   render() {

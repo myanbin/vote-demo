@@ -45,13 +45,13 @@ class ResultsTable extends React.Component {
               <TableHeaderColumn style={{fontSize: 16, width: 24}}>
                 #
               </TableHeaderColumn>
-              <TableHeaderColumn style={{fontSize: 16, width: '62%'}}>
+              <TableHeaderColumn style={{fontSize: 16, width: '60%'}}>
                 拟表彰内容
               </TableHeaderColumn>
               <TableHeaderColumn style={{fontSize: 16}}>
                 报送部门
               </TableHeaderColumn>
-              <TableHeaderColumn style={{fontSize: 16, width: 70}}>
+              <TableHeaderColumn style={{fontSize: 16, width: 60}}>
                 得票数
               </TableHeaderColumn>
             </TableRow>
